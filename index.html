@@ -1,10 +1,96 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta>
-    <title>Hello gh-page</title>
-  </head>
-  <body>
-    Hello gh-page
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <title>localStorage</title>
+</head>
+<body onload="loadTodoList()">
+  <div  class="navbar bg-dark text-white p-2 ">
+    <h1 class=""><i class="bi-card-checklist"></i> Checklist V0!</h1>
+  </div>
+
+  <script>
+    /* only the visible element */
+    function createTaskElement(taskDescription) {
+      var list = document.getElementById("taskList")
+
+      var newTask = document.createElement("div")
+      newTask.className = "list-group-item"
+      newTask.innerHTML = taskDescription
+
+      var taskDeleteButton = document.createElement("div")
+      taskDeleteButton.className = "btn btn-secondary float-end bi-x-circle"
+      newTask.appendChild(taskDeleteButton)
+
+      taskDeleteButton.onclick = function() {
+        removeTodoData(taskDescription)
+        newTask.remove()
+      };
+
+      list.appendChild(newTask)
+    }
+
+    /* Create Button */
+    function createTask() {
+      var taskDescription = document.getElementById("task").value
+
+      if (!taskDescription) {
+        return
+      }
+
+      createTaskElement(taskDescription)
+      addTodoData(taskDescription)
+    }
+
+    /* Data Storage */
+    function getTodoData(taskDescription) {
+      data = JSON.parse(localStorage.getItem('todoData'))
+      return data ? data : [];
+    }
+
+    function addTodoData(taskDescription) {
+      data = getTodoData();
+      data.push(taskDescription);
+      dataJson = JSON.stringify(data);
+      localStorage.setItem('todoData',dataJson);
+    }
+    
+    function removeTodoData(taskDescription) {
+      data = getTodoData();
+      index = data.indexOf(taskDescription);
+      if(index >= 0){ // index -1 -> no element found
+        data.splice(index, 1);   
+        dataJson = JSON.stringify(data);
+        localStorage.setItem('todoData',dataJson);
+      }
+    }
+
+    function loadTodoList() {
+      data = getTodoData();
+      for (i=0; i<data.length; i++) {
+        createTaskElement(data[i])
+      }
+    }
+
+  </script>
+
+  <div class="container list-group mt-3">
+    <div class="list-group-item">
+      <h3>New Task</h3>
+      <div class="input-group">
+        <input id="task" class="form-control" placeholder="task text">
+        <button class="input-group-append btn btn-primary bi-plus-lg" onclick="createTask()"> Add </button>
+      </div>
+    </div>
+    <div class="list-group-item">
+      <h3>Exsisting Tasks</h3>
+      <div id="taskList" class="list-group">
+      </div>
+    </div>
+  </div>
+</body>
 </html>
