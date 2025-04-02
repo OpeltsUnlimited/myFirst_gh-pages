@@ -2,6 +2,7 @@
 
 ### notes:
 
-- add Bootstrap icons
+- add id to groups
+- add function "createTask" to add elements
 
-  https://icons.getbootstrap.com/
+Opening preview in a browser allows better preview.

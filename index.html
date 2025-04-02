@@ -13,33 +13,44 @@
     <h1 class=""><i class="bi-card-checklist"></i> Checklist V0!</h1>
   </div>
 
+  <script>
+    function createTask() {
+      var taskDescription = document.getElementById("task").value
+
+      if (!taskDescription) {
+        return
+      }
+
+      var list = document.getElementById("taskList")
+
+      var newTask = document.createElement("div")
+      newTask.className = "list-group-item"
+      newTask.innerHTML = taskDescription
+
+      var taskDeleteButton = document.createElement("div")
+      taskDeleteButton.className = "btn btn-secondary float-end bi-x-circle"
+      newTask.appendChild(taskDeleteButton)
+
+      taskDeleteButton.onclick = function() {
+        newTask.remove();
+      };
+
+      list.appendChild(newTask)
+    }
+  </script>
+
   <div class="container list-group mt-3">
     <div class="list-group-item">
       <h3>New Task</h3>
       <div class="input-group">
         <input id="task" class="form-control" placeholder="task text">
-        <button class="input-group-append btn btn-primary bi-plus-lg"> Add </button>
+        <button class="input-group-append btn btn-primary bi-plus-lg" onclick="createTask()"> Add </button>
       </div>
     </div>
     <div class="list-group-item">
       <h3>Exsisting Tasks</h3>
-      <ul class="list-group">
-        <li class="list-group-item">
-          Task1
-          <button class="btn btn-secondary float-end bi-x-circle">
-          </button>
-        </li>
-        <li class="list-group-item">
-          Task2
-          <button class="btn btn-secondary float-end bi-x-circle">
-          </button>
-        </li>
-        <li class="list-group-item">
-          Task3
-          <button  class="btn btn-secondary float-end bi-x-circle">
-          </button>
-        </li>
-      </ul>
+      <div id="taskList" class="list-group">
+      </div>
     </div>
   </div>
 </body>
