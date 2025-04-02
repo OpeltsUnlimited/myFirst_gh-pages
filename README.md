@@ -2,5 +2,6 @@
 
 ### notes:
 
-- add Bootstrap
-https://getbootstrap.com/docs/5.0/
+- add Bootstrap icons
+
+  https://icons.getbootstrap.com/
