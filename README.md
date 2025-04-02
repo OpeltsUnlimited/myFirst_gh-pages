@@ -2,7 +2,6 @@
 
 ### notes:
 
-- add id to groups
-- add function "createTask" to add elements
+- add localStorage
 
-Opening preview in a browser allows better preview.
+console.log is very usefull for debugging
