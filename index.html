@@ -3,37 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>basic layout</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
+  <title>Bootstrap</title>
 </head>
 <body>
-  <div style="background-color: black; color: white;">
+  <div  class="navbar bg-dark text-white p-2 ">
     <h1>Checklist V0!</h1>
   </div>
 
-  <div style="width: 500px;">
-    <div style="border-style: ridge;">
-      <input id="task" placeholder="task text">
-      <button  style="float: right;"> Add
-      </button>
+  <div class="container list-group mt-3">
+    <div class="list-group-item">
+      <h3>New Task</h3>
+      <div class="input-group">
+        <input id="task" class="form-control" placeholder="task text">
+        <button class="input-group-append btn btn-primary"> Add </button>
+      </div>
     </div>
-    <div style="border-style: ridge;">
-      Tasks:
-      <ul>
-      <li style="clear: both;">
-        Task1
-        <button style="float: right;"> X
-        </button>
-      </li>
-      <li style="background-color: antiquewhite; clear: both;">
-        Task2
-        <button style="float: right;"> X
-        </button>
-      </li>
-      <li style="clear: both;">
-        Task3
-        <button style="float: right;"> X
-        </button>
-      </li>
+    <div class="list-group-item">
+      <h3>Exsisting Tasks</h3>
+      <ul class="list-group">
+        <li class="list-group-item">
+          Task1
+          <button class="btn btn-secondary float-end"> X
+          </button>
+        </li>
+        <li class="list-group-item">
+          Task2
+          <button class="btn btn-secondary float-end"> X
+          </button>
+        </li>
+        <li class="list-group-item">
+          Task3
+          <button  class="btn btn-secondary float-end"> X
+          </button>
+        </li>
       </ul>
     </div>
   </div>

@@ -2,8 +2,5 @@
 
 ### notes:
 
-- install microsoft "live preview" plugin (VS-Code)
-
-   (good to preview html changes)
-
-- add some test layout
+- add Bootstrap
+https://getbootstrap.com/docs/5.0/
