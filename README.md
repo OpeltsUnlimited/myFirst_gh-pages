@@ -1,15 +1,11 @@
 # myFirst_gh-pages
 
-### notes: Use effect for loading:
+### notes: Switching to Stats:
 
-* loading with onLoad in react seems unstable
-* lukily "useEffect" does just wat i need.
+* State allows to react to a change of value
+* usage needs some change to how the program works:
 
-        useEffect(() => { <function>;}, []);
-
-  schould only be runb once
-
-* it seems (atleasst in develop) it is run twice.
-
-  This seems to be caused by &lt;react.StrictMode&gt; so i removed it
-  .
+* "taskListData" is initialized using the load function
+* a "useEffect" reactrs to changes in "taskListData"
+  and clears&rebuilds the task list.
+* add/remove function now just use "setTaskListData" to change

@@ -1,9 +1,68 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function App() {  
+  const [taskListData, setTaskListData] = useState(getTodoData());
+
   useEffect(() => {
-    loadTodoList();
-  }, []);
+    storeTodoData();
+    createTaskElements();
+  }, [taskListData]);
+
+  function getTodoData() {
+    var data = JSON.parse(localStorage.getItem('todoData'))
+    return data ? data : [];
+  }
+  function storeTodoData() {
+    var dataJson = JSON.stringify(taskListData)
+    localStorage.setItem('todoData',dataJson)
+  }
+
+  function createTaskElements() {
+    var list = document.getElementById("taskList")
+    while (list.firstChild) {
+      list.removeChild(list.lastChild);
+    }
+    for (var i=0; i<taskListData.length; i++) {
+      console.log(taskListData[i])
+      createTaskElement(list, taskListData[i])
+    }
+  }
+
+  function createTaskElement(list, taskDescription) {
+
+    var newTask = document.createElement("div")
+    newTask.className = "list-group-item"
+    newTask.innerHTML = taskDescription
+
+    var taskDeleteButton = document.createElement("div")
+    taskDeleteButton.className = "btn btn-secondary float-end bi-x-circle"
+    newTask.appendChild(taskDeleteButton)
+
+    taskDeleteButton.onclick = function() {
+      removeTask(taskDescription)
+    };
+
+    list.appendChild(newTask)
+  }
+
+  function createTask() {
+
+    var taskDescription = document.getElementById("task").value
+    if (taskListData.includes(taskDescription)) {
+      return
+    }
+    setTaskListData([...taskListData, taskDescription])
+
+    //addTodoData(taskDescription)
+  }
+
+  function removeTask(taskDescription) {
+    if (!taskListData.includes(taskDescription)) {
+      return
+    }
+    setTaskListData(taskListData.filter(element => element !== taskDescription))
+  }
+
   return (
   <div className="App">
     <div  className="navbar bg-dark text-white p-2 ">
@@ -28,68 +87,4 @@ function App() {
   )
   }
 
-  
-  /* only the visible element */
-      function createTaskElement(taskDescription) {
-        var list = document.getElementById("taskList")
-  
-        var newTask = document.createElement("div")
-        newTask.className = "list-group-item"
-        newTask.innerHTML = taskDescription
-  
-        var taskDeleteButton = document.createElement("div")
-        taskDeleteButton.className = "btn btn-secondary float-end bi-x-circle"
-        newTask.appendChild(taskDeleteButton)
-  
-        taskDeleteButton.onclick = function() {
-          removeTodoData(taskDescription)
-          newTask.remove()
-        };
-  
-        list.appendChild(newTask)
-      }
-  
-      /* Create Button */
-      function createTask() {
-        var taskDescription = document.getElementById("task").value
-  
-        if (!taskDescription) {
-          return
-        }
-  
-        createTaskElement(taskDescription)
-        addTodoData(taskDescription)
-      }
-  
-      /* Data Storage */
-      function getTodoData(taskDescription) {
-        var data = JSON.parse(localStorage.getItem('todoData'))
-        return data ? data : [];
-      }
-  
-      function addTodoData(taskDescription) {
-        var data = getTodoData();
-        data.push(taskDescription);
-        var dataJson = JSON.stringify(data);
-        localStorage.setItem('todoData',dataJson);
-      }
-      
-      function removeTodoData(taskDescription) {
-        var data = getTodoData();
-        var index = data.indexOf(taskDescription);
-        if(index >= 0){ // index -1 -> no element found
-          data.splice(index, 1);   
-          var dataJson = JSON.stringify(data);
-          localStorage.setItem('todoData',dataJson);
-        }
-      }
-  
-      function loadTodoList() {
-        var data = getTodoData();
-        for (var i=0; i<data.length; i++) {
-          console.log(data[i])
-          createTaskElement(data[i])
-        }
-      }
-  
   export default App;
