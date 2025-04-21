@@ -42,12 +42,19 @@
 * edit gitignore:
     we want to ighnore "gh-pages" (our push folder) as well as "build"
 
-* edit package.json, adding
-    "postbuild": "./myPostbuild.sh",
+* edit package.json,
+
+    * Add url used for deploy
+
+            "homepage": "https://opeltsunlimited.github.io/myFirst_gh-pages/",
+
+    * add a custom post build step:
+
+            "postbuild": "./myPostbuild.sh",
 
 * add "myPostbuild.sh"
 
-        #!/bin/bash
+            #!/bin/bash
 
     to make sure the script is resd correctly (else the next command dosent work)
 
@@ -63,6 +70,13 @@
 
     copy build to release
 
+        echo "" > gh-pages/.nojekyll
+
+    create a ".nojekyll" file usesd to instrucht github to not run Jekyll
+
 * run "npm run build"
 * push gh-pages to github.
-        
+
+PS: the npm packahge "gh-pages" schould do some of the copy and push for us
+
+TODO: icons missing

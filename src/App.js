@@ -1,7 +1,7 @@
 
 function App() {  
   return (
-  <div className="App" onLoad={loadTodoList()}>
+  <div className="App" onLoad={loadTodoList}>
     <div  className="navbar bg-dark text-white p-2 ">
       <h1 className=""><i className="bi-card-checklist"></i> Checklist V0!</h1>
     </div>
