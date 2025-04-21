@@ -1,7 +1,11 @@
+import React, { useEffect } from 'react';
 
 function App() {  
+  useEffect(() => {
+    loadTodoList();
+  }, []);
   return (
-  <div className="App" onLoad={loadTodoList}>
+  <div className="App">
     <div  className="navbar bg-dark text-white p-2 ">
       <h1 className=""><i className="bi-card-checklist"></i> Checklist V0!</h1>
     </div>
@@ -83,6 +87,7 @@ function App() {
       function loadTodoList() {
         var data = getTodoData();
         for (var i=0; i<data.length; i++) {
+          console.log(data[i])
           createTaskElement(data[i])
         }
       }
