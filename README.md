@@ -1,27 +1,33 @@
 # myFirst_gh-pages
 
-### notes: Using gh-pages for deploy:
+### notes: replacing old "create react app" with "vite":
 
-* install gh-pages
+* uninstall "react-scripts"
 
-        npm install gh-pages --save-dev
+        npm uninstall react-scripts
 
-* add depoy step
+* install vite
 
-        "deploy": "gh-pages -d build"
+        npm install vite @vitejs/plugin-react --save-dev
 
-* test
+* change our package.json script part
 
-  Change test in index.html
+        "start": "vite",
+        "build": "vite build",
 
-    npm run build
-    npm run deploy
+* now our audit schould be clean:
 
-* remove our old deploy stubs:
-  * from package.json "postbuild"
-  * the "myPostbuild.sh" file
-  * the "gh-pages" folder
+        npm audit fix
 
-        git worktree remove gh-pages
+* but i have a warning for a older node version
+  * get version
 
-  * "gh-pages" from gitignore --force
+         nvm ls
+
+  * install newest
+
+         nvm install v22.14.0
+
+  * also check packages for updates
+
+        npm update
