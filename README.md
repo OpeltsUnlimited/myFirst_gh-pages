@@ -1,11 +1,27 @@
 # myFirst_gh-pages
 
-### notes: Switching to Stats:
+### notes: Using gh-pages for deploy:
 
-* State allows to react to a change of value
-* usage needs some change to how the program works:
+* install gh-pages
 
-* "taskListData" is initialized using the load function
-* a "useEffect" reactrs to changes in "taskListData"
-  and clears&rebuilds the task list.
-* add/remove function now just use "setTaskListData" to change
+        npm install gh-pages --save-dev
+
+* add depoy step
+
+        "deploy": "gh-pages -d build"
+
+* test
+
+  Change test in index.html
+
+    npm run build
+    npm run deploy
+
+* remove our old deploy stubs:
+  * from package.json "postbuild"
+  * the "myPostbuild.sh" file
+  * the "gh-pages" folder
+
+        git worktree remove gh-pages
+
+  * "gh-pages" from gitignore --force
